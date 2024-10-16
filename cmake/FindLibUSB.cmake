@@ -9,9 +9,9 @@ target LibUSB::LibUSB
 
 # TODO Append parts for Version compasion and REQUIRED support
 
-if (MSVC OR MINGW)
-    return()
-endif()
+# if (MSVC OR MINGW)
+#     return()
+# endif()
 
 if (NOT TARGET LibUSB::LibUSB)
   find_package(PkgConfig)

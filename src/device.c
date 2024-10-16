@@ -39,6 +39,10 @@
 #include "libuvc/libuvc.h"
 #include "libuvc/libuvc_internal.h"
 
+#ifdef _WIN32
+#define strdup _strdup
+#endif
+
 int uvc_already_open(uvc_context_t *ctx, struct libusb_device *usb_dev);
 void uvc_free_devh(uvc_device_handle_t *devh);
 

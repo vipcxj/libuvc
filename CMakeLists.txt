@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5)
 project(libuvc
   VERSION 0.0.7
   LANGUAGES C
@@ -57,7 +57,12 @@ if(UNIX AND NOT APPLE)
   find_package(Threads REQUIRED)
   set(threads Threads::Threads)
 endif()
+if(WIN32)
+  find_package(PThreads4W REQUIRED)
+  set(threads PThreads4W::PThreads4W)
+endif()
 
+message(STATUS "cmake build target: ${CMAKE_BUILD_TARGET}")
 if(${CMAKE_BUILD_TARGET} MATCHES "Shared")
   set(BUILD_UVC_SHARED TRUE)
 elseif(${CMAKE_BUILD_TARGET} MATCHES "Static")
@@ -145,12 +150,15 @@ endforeach()
 
 if(BUILD_EXAMPLE)
   add_executable(example src/example.c)
-  find_package(Threads)
   target_link_libraries(example
-    PRIVATE
-      LibUVC::UVC
-      Threads::Threads
+  PRIVATE
+    LibUVC::UVC
+    LibUSB::LibUSB
+    ${threads}
   )
+  if(JPEG_FOUND)
+    target_link_libraries(example PRIVATE JPEG::JPEG)
+  endif()
 endif()
 
 if(BUILD_TEST)
