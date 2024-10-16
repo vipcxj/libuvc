@@ -75,6 +75,9 @@ else()
 endif()
 
 if(BUILD_UVC_SHARED)
+  if(WIN32)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+  endif()
   add_library(uvc SHARED ${SOURCES})
   set_target_properties(uvc PROPERTIES
     VERSION ${libuvc_VERSION}
