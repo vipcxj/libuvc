@@ -22,7 +22,7 @@ if (NOT TARGET LibUSB::LibUSB)
   if(LibUSB_FOUND)
     message(STATUS "libusb-1.0 found using pkgconfig")
 
-    if(LibUSB_LIBRARY)
+    if(TARGET PkgConfig::LibUSB)
       set_target_properties(PkgConfig::LibUSB PROPERTIES
         IMPORTED_LINK_INTERFACE_LANGUAGES "C"
       )
