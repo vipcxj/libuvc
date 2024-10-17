@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.6)
 project(libuvc
   VERSION 0.0.7
   LANGUAGES C
@@ -121,7 +121,7 @@ foreach(target_name IN LISTS UVC_TARGETS)
       $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
       $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
       $<INSTALL_INTERFACE:include>
-  )
+  )  
   target_link_libraries(${target_name}
     # libusb-1.0 used internally so we link to it privately.
     PRIVATE LibUSB::LibUSB ${threads}
